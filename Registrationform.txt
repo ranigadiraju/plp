@@ -1,0 +1,95 @@
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+	public class Registrationform {
+
+		public static void main(String[] args) throws InterruptedException {
+			// TODO Auto-generated method stub
+			int len=10;
+			System.setProperty("webdriver.chrome.driver", "D:/chromedriver.exe");
+	        WebDriver driver = new ChromeDriver(); 
+	
+	        driver.get("http://demo.opencart.com"); 
+	        driver.manage().window().maximize();
+	        Map<String, String> objMap = new HashMap<String, String>();
+	        driver.findElement(By.xpath("//*[@id='top-links']/ul/li[2]/a/span[1]")).click();
+	        System.out.println("My Account is clicked");
+	        driver.findElement(By.xpath("//*[@id='top-links']/ul/li[2]/ul/li[1]/a")).click();
+	        System.out.println("Register is clicked");
+	        driver.findElement(By.name("firstname")).sendKeys("anudeep");
+	        WebElement Name = driver.findElement(By.id("input-firstname"));
+			String name = Name.getAttribute("value");
+			objMap.put("fname", name);
+	        if(Validations.Firstname(name))
+	        {
+	        	driver.findElement(By.name("lastname")).sendKeys("chowtapalli");
+	        	WebElement surname = driver.findElement(By.id("input-lastname"));
+	        	String Lname = surname.getAttribute("value");
+	        	objMap.put("Lname", Lname);
+	        	if(Validations.Lastname(Lname))
+	        	{
+	        		driver.findElement(By.id("input-email")).sendKeys("anudeep1@mail.com");
+	        		WebElement mail = driver.findElement(By.id("input-email"));
+	        		String Id = mail.getAttribute("value");
+	        		objMap.put("Email", Id);
+	        		if(Validations.Email(Id))
+	        		{
+	        			
+	        			driver.findElement(By.xpath("//*[@id='input-telephone']")).sendKeys("7095972061");
+	        			WebElement phone = driver.findElement(By.id("input-telephone"));
+	        			String number = phone.getAttribute("value");
+	        			objMap.put("Number", number);
+	        			if(Validations.Telephone(number))
+	        			{
+	        				driver.findElement(By.cssSelector("#input-password")).sendKeys("aduoo548");
+	        				WebElement code = driver.findElement(By.id("input-password"));
+	        				String password = code.getAttribute("value");
+	        				
+	        				if(Validations.Password(password))
+	        				{
+	        					driver.findElement(By.cssSelector("#input-confirm")).sendKeys("aduoo548");
+	        					WebElement confirm = driver.findElement(By.id("input-confirm"));
+	        					String passconfirm = confirm.getAttribute("value");
+	        					if(Validations.Confirmation(password, passconfirm))
+	        					{
+	        						driver.findElement(By.cssSelector(".radio-inline>input")).click();
+	        						driver.findElement(By.xpath("//*[@id='content']/form/div/div/input[1]")).click();
+	        						driver.findElement(By.xpath("//*[@id='content']/form/div/div/input[2]")).click();
+	        						driver.quit();
+	        					}
+	        				}
+	        			}
+	        		}
+	        	}
+	        }	
+	        System.out.println(geek_Password(len));
+	        System.out.println("Registered details are :");
+	        System.out.println(objMap);
+	     }
+		private static char[] geek_Password(int len) 
+		{
+		// TODO Auto-generated method stub
+			System.out.print("Random String generated  is : ");
+			String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		    String Small_chars = "abcdefghijklmnopqrstuvwxyz";
+		    String numbers = "0123456789";
+			String symbols = "!@#$%^&*_=+-/.?<>)";
+		    String values = Capital_chars + Small_chars +  numbers + symbols;
+			Random rndm_method = new Random();
+			char[] password = new char[len];
+			for (int i = 0; i < len; i++)
+			{  
+				password[i] =  values.charAt(rndm_method.nextInt(values.length()));
+			}
+			return password;
+		}	
+} 

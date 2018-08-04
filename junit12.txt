@@ -1,0 +1,74 @@
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class Junit {
+
+	 WebDriver driver = new ChromeDriver(); 
+	  @BeforeClass
+		public static void beforeclasstest()
+		{
+			System.setProperty("webdriver.chrome.driver", "D:/150682/M4/SEL/chromedriver.exe");
+		   
+		}
+	  @Before
+		public void beforetest()
+		{
+			System.out.println("Verification Starting.......");
+		}
+	@Test
+	public void test() {
+		
+		 String expectedtitle = "Your Store";
+		 driver.get("http://demo.opencart.com");
+		 String  actualtitle = driver.getTitle();
+		 assertEquals(expectedtitle, actualtitle);
+		 driver.findElement(By.partialLinkText("My Account")).click();
+			driver.findElement(By.id("account-login")).click();
+			driver.findElement(By.xpath("//input[@id='input-email']")).sendKeys("Techno@gmail.com");
+			driver.findElement(By.xpath("//input[@id='input-password']")).sendKeys("Campus@123123");
+			driver.findElement(By.xpath(".//*[@id='content']/div/div[2]/div/form/input")).click(); 
+			boolean title=driver.getTitle().contains("My Account");
+			if(title==true)
+			{
+				System.out.println("Successful Login");
+			}
+			else
+			{
+				System.out.println("Unsuccessful Login");
+			}
+
+		
+		 System.out.println("Test Executing.......");
+		 
+	}
+	@Test
+	public void test1()
+	{
+		System.out.println("Test1 Executing.......");
+		driver.get("http://demo.opencart.com");
+		java.util.List<WebElement> links = driver.findElements(By.tagName("a"));
+	        
+			int link=links.size();
+			if(link==73)
+			{
+					System.out.println("Links are verified");
+			}
+	}
+	@After
+	public void aftertest()
+	{
+		System.out.println("Verification ended");
+		driver.quit();
+	}
+
+
+}

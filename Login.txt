@@ -1,0 +1,53 @@
+
+import java.util.HashMap;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DemoCart {
+	
+	public static void main(String[] args) throws InterruptedException{
+		
+    System.setProperty("webdriver.chrome.driver", "D:/150682/M4/SEL/chromedriver.exe");
+	WebDriver driver =new ChromeDriver();
+	driver.get("https://demo.opencart.com/");
+	driver.manage().window().maximize();
+	System.out.println("Browser Has Been Launched");
+	
+	HashMap<String, String> map = new HashMap<>();
+	map.put("anudeep1@mail.com", "aduoo548");
+	map.put("anudeep2@mail.com", "aduoo548");
+
+
+	driver.findElement(By.partialLinkText("My Account")).click();
+	driver.findElement(By.xpath(".//*[@id='top-links']/ul/li[2]/ul/li[2]/a")).click();
+
+
+    String email ="anudeep1@mail.com";
+	driver.findElement(By.xpath("//input[@id='input-email']")).sendKeys(email);
+	WebElement email1 = driver.findElement(By.name("email"));
+	String mail = email1.getAttribute("value");
+	if(Validations.Email(mail))
+	{
+		driver.findElement(By.name("password")).sendKeys("aduoo548");
+		WebElement pwd = driver.findElement(By.name("password"));
+		String pass = pwd.getAttribute("value");
+		if(Validation.validatepassword(pass))
+		{
+			driver.findElement(By.xpath(".//*[@id='content']/div/div[2]/div/form/input")).click(); 
+               //driver.quit();
+		}
+		if (map.containsKey(email)) 
+		{
+			String a = map.get(email);
+	    	if(a.equals(pass)){
+	        System.out.println("Registered User!!!...");}
+	    	else{
+		    System.out.println("Unregistered User!!!...");}
+		
+		}
+	}
+	
+}	
+}

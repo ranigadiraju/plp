@@ -1,0 +1,93 @@
+import java.util.regex.Pattern;
+
+
+public class Validations {
+	
+	//HashMap<Integer, String> emailmap = new HashMap<Integer, String>();
+
+	//ArrayList<String> arrl = new ArrayList<String>();
+	
+	public static boolean Firstname(String name) {
+		// TODO Auto-generated method stub
+		
+		if(name.matches("[a-zA-Z]+"))
+		{
+			System.out.println("Valid firstname");
+			return true;
+		}
+		else{
+			System.out.println("Enter valid first name");
+			return false;
+		}
+	}
+
+	public static boolean Lastname(String lname) {
+		// TODO Auto-generated method stub
+
+		if(lname.matches("[a-zA-Z]+"))
+		{
+			System.out.println("Valid lastname");
+			return true;
+		}
+		else{
+			System.out.println("Enter valid last name");
+			return false;
+		}
+	}
+	static boolean containsNonAlphanumeric (String string) {
+	    return Pattern.compile("[^\\w\\s]").matcher(string).find();
+	    // Alternatively:
+	    // return !string.matches("[\\w\\s]*");
+	}
+	public static boolean Email(String email) {
+		// TODO Auto-generated method stub
+		
+		 if((email.endsWith(".com") || email.endsWith(".in")) && containsNonAlphanumeric(email)){
+			 System.out.println("Valid Email");
+	            return true;
+	        }
+	        else
+	        {
+	        	System.out.println("Enter a valid email");
+	        	return false;
+	        }
+	}
+
+	public static boolean Telephone(String number) {
+		// TODO Auto-generated method stub
+		if(number.matches("[0-9]+")){
+			System.out.println("Valid Number");
+			return true;
+			}
+			else{
+				System.out.println("Enter valid number");
+				return false;
+			}
+	}
+
+	public static boolean Password(String password) {
+		// TODO Auto-generated method stub
+		
+		if(password.length() > 3 ){
+			System.out.println("valid password");
+			return true;
+		}
+		else {
+			System.out.println("Enter valid password");
+			return false;
+		}
+	}
+
+	public static boolean Confirmation(String password, String passconfirm) {
+		// TODO Auto-generated method stub
+		if(password.equals(passconfirm))
+		{
+			return true;
+		}
+		else{
+		return false;
+		}
+	}
+
+	
+}
